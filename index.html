@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101115">
+  <meta name="description" content="A responsive typed-decision AI landing page and interactive simulation, ready to deploy on Fenze Cloud.">
+  <title>Signal — Decisions, not paragraphs</title>
+  <style>
+    :root { color-scheme:dark; --bg:#101115; --surface:#181a20; --text:#f3f3ee; --sub:#aaaab2; --line:#373941; --lime:#c3ff78; --purple:#a99aff; }
+    * {box-sizing:border-box} html {scroll-behavior:smooth} body {margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+    a{color:inherit;text-decoration:none} button,textarea{font:inherit} button{cursor:pointer}
+    .wrap{max-width:1160px;margin:auto;padding:0 28px} nav{height:86px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #27282d}
+    .brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:750;letter-spacing:-.055em}.mark{display:grid;place-items:center;background:var(--lime);color:#111;width:31px;height:31px;border-radius:9px;font-size:19px;font-weight:900;transform:rotate(-8deg)}
+    .navitems{display:flex;gap:28px;align-items:center;color:#c0c0c7;font-size:14px}.navitems a:hover{color:white}
+    .mini-btn{border:1px solid #5a5d60;padding:11px 16px;border-radius:8px;color:#fff;background:none}
+    .hero{padding:108px 0 72px;text-align:center}.eyebrow{display:inline-flex;gap:9px;align-items:center;padding:8px 13px;border-radius:999px;border:1px solid #494d43;color:#d5fcb6;background:#222820;font-size:12px;letter-spacing:.06em;font-weight:700;text-transform:uppercase}.dot{height:7px;width:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 16px var(--lime)}
+    h1{font-size:clamp(49px,7.8vw,106px);line-height:.98;letter-spacing:-.075em;max-width:1020px;margin:28px auto;font-weight:720} h1 em{font-style:normal;color:var(--lime)}
+    .lead{color:#b4b6bb;font-size:clamp(16px,2vw,20px);max-width:650px;margin:0 auto 31px}.actions{display:flex;gap:11px;justify-content:center;flex-wrap:wrap}
+    .primary{padding:14px 22px;background:var(--lime);border:1px solid var(--lime);border-radius:9px;color:#151713;font-weight:760}.primary:hover{background:#d7ffad}.secondary{padding:14px 22px;background:#202127;border:1px solid #414248;border-radius:9px;color:#f0eff5;font-weight:660}.secondary:hover{background:#2c2e36}
+    .statline{display:flex;justify-content:center;gap:27px;flex-wrap:wrap;font-size:12px;margin-top:27px;color:#a6a9a6}.statline strong{color:var(--lime);font-weight:750}
+    .demo{background:#17191f;border:1px solid #3a3c43;border-radius:17px;overflow:hidden;box-shadow:0 24px 90px #0007;margin:20px auto 96px;max-width:1030px}
+    .demotop{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #363840;padding:16px 22px;font-size:13px;color:#bfc1c8}.windowdots{display:flex;gap:6px}.windowdots span{width:8px;height:8px;border-radius:50%;background:#555961}.windowdots span:first-child{background:#ff7a75}.windowdots span:nth-child(2){background:#f6cd65}.windowdots span:nth-child(3){background:#a6df8e}
+    .demobody{display:grid;grid-template-columns:1.1fr .9fr;min-height:355px}.inputpane,.outputpane{padding:26px}.inputpane{border-right:1px solid #363840}.label{font-size:11px;letter-spacing:.13em;font-weight:780;text-transform:uppercase;color:#979aab}.inputpane textarea{width:100%;margin:16px 0 15px;min-height:143px;resize:vertical;border-radius:9px;border:1px solid #464853;background:#101217;color:#eeeeef;padding:16px;outline:none}.inputpane textarea:focus{border-color:#baff78}.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.preset{border:1px solid #474951;background:#23252d;border-radius:6px;padding:7px 10px;font-size:12px;color:#d7d7dd}.preset:hover,.preset.active{border-color:var(--lime);color:var(--lime)}.run{width:100%;text-align:center}
+    .outputpane{background:#1b1d24}.outputpane .sub{font-size:12px;color:#9295a0;margin-top:5px}.result{background:#12141a;border:1px solid #393b45;padding:16px;border-radius:10px;margin-top:22px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #2b2e35;font-size:13px}.row:last-child{border-bottom:0}.key{color:#9fa4b4}.value{color:var(--lime);font-weight:760}.value.purple{color:var(--purple)}.bar{height:6px;background:#34353e;border-radius:7px;margin:13px 0 9px;overflow:hidden}.fill{height:100%;width:88%;background:linear-gradient(90deg,#8ccf59,var(--lime));transition:width .45s}.note{font-size:11px;color:#9699a4}.simulation{color:#f8d18b;font-size:11px;border:1px solid #66553e;padding:4px 7px;border-radius:5px}
+    .sectionheader{margin:0 0 36px}.sectionheader h2{font-size:clamp(32px,4.6vw,58px);letter-spacing:-.06em;line-height:1.08;margin:12px 0}.sectionheader p{max-width:600px;color:var(--sub)}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:104px}.feature{background:#191b21;border:1px solid #373942;padding:25px;border-radius:12px;min-height:210px}.feature .glyph{font-size:27px;color:var(--lime);margin-bottom:26px}.feature h3{font-size:20px;margin:0 0 8px;letter-spacing:-.04em}.feature p{font-size:14px;color:#a9abb6;margin:0}
+    .cta{margin-bottom:65px;padding:50px;border-radius:14px;background:#d0ff90;color:#182011;display:flex;align-items:center;justify-content:space-between;gap:18px}.cta h2{font-size:clamp(29px,4vw,52px);line-height:1;letter-spacing:-.06em;margin:0 0 12px}.cta p{margin:0;color:#3a4931}.cta a{background:#161a16;color:#fff;border-radius:8px;padding:14px 18px;font-size:14px;font-weight:700;white-space:nowrap}footer{border-top:1px solid #303238;padding:25px 0 38px;color:#8f929d;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    @media(max-width:780px){.wrap{padding:0 18px}nav{height:70px}.navitems a:not(.mini-btn){display:none}.hero{padding:80px 0 55px}.demobody{grid-template-columns:1fr}.inputpane{border-right:0;border-bottom:1px solid #363840}.features{grid-template-columns:1fr}.feature{min-height:unset}.cta{display:block;padding:32px}.cta a{display:inline-block;margin-top:24px}.demo{margin-bottom:76px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fill{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav aria-label="Main navigation"><a class="brand" href="#top" aria-label="Signal home"><span class="mark">↗</span>signal<span style="color:var(--lime)">.</span></a><div class="navitems"><a href="#playground">Playground</a><a href="#features">How it works</a><a class="mini-btn" href="#playground">Try demo ↗</a></div></nav>
+    <main id="top">
+      <section class="hero"><div class="eyebrow"><span class="dot"></span> Live HTML deployment test</div><h1>Decisions, <em>not</em><br> paragraphs.</h1><p class="lead">Meet a different kind of intelligence interface. Give it messy input, get clean typed decisions your software can understand.</p><div class="actions"><a class="primary" href="#playground">Try interactive demo ↗</a><a class="secondary" href="#features">Explore the idea ↓</a></div><div class="statline"><span><strong>01</strong> Structured outputs</span><span><strong>02</strong> Clear confidence</span><span><strong>03</strong> Developer-friendly</span></div></section>
+      <section id="playground" class="demo" aria-label="Interactive decision simulator"><div class="demotop"><div style="display:flex;gap:13px;align-items:center"><div class="windowdots" aria-hidden="true"><span></span><span></span><span></span></div><strong style="color:#edeef2">decision.playground</strong></div><span class="simulation">LOCAL SIMULATION</span></div><div class="demobody"><div class="inputpane"><div class="label">Input / state</div><textarea id="message" aria-label="Input message" spellcheck="true">Urgent: I was charged twice and need a refund. My order still hasn't arrived after two weeks.</textarea><div class="presets" aria-label="Example messages"><button class="preset active" data-case="support">Support ticket</button><button class="preset" data-case="sales">Sales lead</button><button class="preset" data-case="feedback">User feedback</button></div><button id="run" class="primary run">Run decision simulation ↗</button></div><div class="outputpane"><div class="label">Typed output</div><div class="sub">A sample structured response from local JavaScript</div><div class="result" aria-live="polite"><div class="row"><span class="key">category <span style="color:#626778">· choice</span></span><span class="value" id="category">billing</span></div><div class="row"><span class="key">priority <span style="color:#626778">· score</span></span><span class="value purple" id="priority">high</span></div><div class="row"><span class="key">escalate <span style="color:#626778">· boolean</span></span><span class="value" id="escalate">true</span></div><div style="display:flex;justify-content:space-between;gap:10px;margin-top:17px;font-size:12px"><span class="key">Illustrative confidence</span><span id="confidence">88%</span></div><div class="bar"><div class="fill" id="bar"></div></div><div class="note">Demo values are heuristic and illustrative, not calibrated model probabilities.</div></div></div></div></section>
+      <section id="features" aria-label="Features"><div class="sectionheader"><div class="label" style="color:var(--lime)">Made for automation</div><h2>Intelligence that<br>fits into your code.</h2><p>A concept demo of typed AI decisions, inspired by machine-native model design. Simple enough to deploy as one HTML file.</p></div><div class="features"><article class="feature"><div class="glyph">◈</div><h3>Choice</h3><p>Pick a defined category. The output is a value your application can branch on.</p></article><article class="feature"><div class="glyph">⌁</div><h3>Score</h3><p>Represent priority or intensity in a compact, predictable format.</p></article><article class="feature"><div class="glyph">◎</div><h3>Decision</h3><p>Return a simple true or false signal and show an illustrative confidence.</p></article></div></section>
+      <section class="cta"><div><h2>From prototype<br>to production.</h2><p>Built with HTML, CSS and JavaScript. Hosted with Fenze Cloud.</p></div><a href="#playground">Test the demo ↗</a></section>
+    </main>
+    <footer><span>© <span id="year"></span> Signal Demo · Independent concept project</span><span>Not affiliated with TypeSafe AI or Jev. No real AI API calls.</span></footer>
+  </div>
+  <script>
+    (() => {
+      const presets = {
+        support: 'Urgent: I was charged twice and need a refund. My order still hasn\'t arrived after two weeks.',
+        sales: 'Hello! We are evaluating your product for 200 seats and would love an enterprise pricing demo next week.',
+        feedback: 'Love the new dashboard layout, but the search filter is confusing and the export button is hard to find.'
+      };
+      const message = document.getElementById('message');
+      document.querySelectorAll('.preset').forEach(btn => btn.addEventListener('click', () => {
+        message.value = presets[btn.dataset.case];
+        document.querySelectorAll('.preset').forEach(p => p.classList.toggle('active', p === btn));
+        decide();
+      }));
+      message.addEventListener('input', () => document.querySelectorAll('.preset').forEach(p => p.classList.remove('active')));
+      function decide(){
+        const t = message.value.toLowerCase();
+        const billing = /refund|charged|invoice|payment|billing|money/.test(t);
+        const sales = /pricing|demo|enterprise|seats|quote|purchase/.test(t);
+        const urgent = /urgent|asap|immediately|twice|broken|can't|cannot|failed/.test(t);
+        const category = billing ? 'billing' : sales ? 'sales' : /bug|error|crash|filter/.test(t) ? 'product' : 'general';
+        const priority = urgent ? 'high' : sales ? 'medium' : 'normal';
+        const escalate = urgent || (billing && /refund/.test(t));
+        const confidence = category === 'general' ? 62 : category === 'billing' ? 88 : category === 'sales' ? 84 : 76;
+        document.getElementById('category').textContent = category;
+        document.getElementById('priority').textContent = priority;
+        document.getElementById('escalate').textContent = String(escalate);
+        document.getElementById('confidence').textContent = confidence + '%';
+        document.getElementById('bar').style.width = confidence + '%';
+      }
+      document.getElementById('run').addEventListener('click', decide);
+      document.getElementById('year').textContent = new Date().getFullYear();
+      decide();
+    })();
+  </script>
+</body>
+</html>
